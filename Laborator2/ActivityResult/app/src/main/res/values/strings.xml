@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Activity Result Demo</string>
+    <string name="str_title_activity_result">My Second Activity</string>
+    <string name="str_btn_get_result">Get Results</string>
+    <string name="str_hint_data">aici rezultatul transmis</string>
+</resources>

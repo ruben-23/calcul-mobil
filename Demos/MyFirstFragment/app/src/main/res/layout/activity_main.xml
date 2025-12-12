@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- display a Button and a Fragment  -->
+
+    <Button
+        android:id="@+id/activity_button"
+        android:layout_width="316dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="116dp"
+        android:background="@color/button_background_color"
+        android:text="Activity's Button"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/myfragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/myfragment"
+        android:name="ro.cunbm.myfirstfragment.BlankFragment"
+        android:layout_width="336dp"
+        android:layout_height="323dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.892" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
