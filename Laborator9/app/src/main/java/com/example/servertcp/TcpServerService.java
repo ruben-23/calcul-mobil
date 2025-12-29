@@ -20,12 +20,12 @@ public class TcpServerService extends Service {
     private static final int SERVER_PORT = 8080;
     private boolean isServerRunning = false;
     private ServerSocket serverSocket;
-    // Folosim un ExecutorService pentru a rula operațiunile de rețea în background
+    // Folosim un ExecutorService pentru a rula operatiunile de retea in background
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     public IBinder onBind(Intent intent) {
-        return null; // Nu este necesară legarea (Bound Service) pentru acest exemplu
+        return null; // Nu este necesara legarea (Bound Service) pentru acest exemplu
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TcpServerService extends Service {
             Log.d(TAG, "Pornirea Serverului TCP...");
             executor.execute(new ServerTask());
         }
-        return START_STICKY; // Serviciul va fi repornit dacă este oprit de sistem
+        return START_STICKY; // Serviciul va fi repornit daca este oprit de sistem
     }
 
     @Override
@@ -50,26 +50,26 @@ public class TcpServerService extends Service {
                 serverSocket.close();
             }
         } catch (Exception e) {
-            Log.e(TAG, "Eroare la închiderea socket-ului server: " + e.getMessage());
+            Log.e(TAG, "Eroare la inchiderea socket-ului server: " + e.getMessage());
         }
-        executor.shutdownNow(); // Oprește firul de execuție
+        executor.shutdownNow(); // Opreste firul de executie
         Log.d(TAG, "Serverul TCP oprit.");
     }
 
-    // Task care rulează în firul de execuție separat (non-UI)
+    // Task care ruleaza in firul de executie separat (non-UI)
     private class ServerTask implements Runnable {
         @Override
         public void run() {
             try {
                 serverSocket = new ServerSocket(SERVER_PORT);
-                Log.d(TAG, "Serverul Ascultă pe portul " + SERVER_PORT);
+                Log.d(TAG, "Serverul Asculta pe portul " + SERVER_PORT);
 
                 while (isServerRunning) {
-                    // Așteaptă o conexiune
+                    // Asteapta o conexiune
                     Socket clientSocket = serverSocket.accept();
                     Log.d(TAG, "Client Conectat de la: " + clientSocket.getInetAddress());
 
-                    // Gestionează comunicarea cu clientul
+                    // Gestioneaza comunicarea cu clientul
                     handleClient(clientSocket);
                 }
             } catch (Exception e) {
@@ -85,15 +85,15 @@ public class TcpServerService extends Service {
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
         ) {
-            // Trimite mesaj de confirmare către client
-            out.println("SERVER: Conexiune reușită la serverul Android. Trimite un mesaj.");
+            // Trimite mesaj de confirmare catre client
+            out.println("SERVER: Conexiune reusita la serverul Android. Trimite un mesaj.");
 
-            // Citește mesajul de la client
+            // Citeste mesajul de la client
             String clientMessage = in.readLine();
             if (clientMessage != null) {
                 Log.d(TAG, "Mesaj primit de la Client: " + clientMessage);
-                // Trimite răspuns înapoi la client
-                out.println("SERVER: Am primit mesajul tău: " + clientMessage.toUpperCase());
+                // Trimite raspuns inapoi la client
+                out.println("SERVER: Am primit mesajul tau: " + clientMessage.toUpperCase());
             }
 
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class TcpServerService extends Service {
         } finally {
             try {
                 clientSocket.close();
-                Log.d(TAG, "Conexiune cu clientul închisă.");
+                Log.d(TAG, "Conexiune cu clientul inchisa.");
             } catch (Exception e) {
                 // Ignorat
             }
